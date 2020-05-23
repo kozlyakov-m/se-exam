@@ -4,6 +4,7 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.persist.Transactional
 import com.kozlyakov.project.domain.Department
+import com.kozlyakov.project.domain.Employee
 import javax.persistence.EntityManager
 import javax.persistence.TypedQuery
 import javax.persistence.criteria.CriteriaQuery
@@ -15,6 +16,7 @@ class DepartmentDao @Inject constructor(
     fun findById(id: Int): Department?{
         return entityManager.get().find(Department::class.java, id)
     }
+
     fun getAll(): List<Department> {
         val criteriaQuery = entityManager.get().criteriaBuilder.createQuery(Department::class.java)
         val rootEntry: Root<Department> = criteriaQuery.from(Department::class.java)
@@ -35,5 +37,15 @@ class DepartmentDao @Inject constructor(
         em.persist(department)
         em.transaction.commit()
 
+    }
+
+    @Transactional
+    fun delete(id: Int): Boolean {
+        val em = entityManager.get()
+        val e = this.findById(id) ?: return false
+        em.transaction.begin()
+        em.remove(e)
+        em.transaction.commit()
+        return true
     }
 }

@@ -51,4 +51,17 @@ class DepartmentServlet : HttpServlet() {
             response.sendError(400, e.message)
         }
     }
+    @Throws(ServletException::class, IOException::class)
+    override fun doDelete(request: HttpServletRequest, response: HttpServletResponse) {
+        val id = request.reader.readLine()
+        if (!HandleError().sendErrorForIntegerParameterIfIsNeeded(id, response)) {
+            val deleted = departmentDao.delete(id.toInt())
+            if(deleted) {
+                response.status = 200
+            }
+            else {
+                response.sendError(404)
+            }
+        }
+    }
 }
