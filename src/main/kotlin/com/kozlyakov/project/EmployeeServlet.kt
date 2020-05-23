@@ -52,9 +52,25 @@ class EmployeeServlet: HttpServlet() {
         try{
             val department = gson.fromJson(requestJson, Employee::class.java)
             employeeDao.save(department)
+            response.status = 201
         }
         catch (e: Exception) {
             response.sendError(400, e.message)
+        }
+    }
+
+
+    @Throws(ServletException::class, IOException::class)
+    override fun doDelete(request: HttpServletRequest, response: HttpServletResponse) {
+        val id = request.reader.readLine()
+        if (!HandleError().sendErrorForIntegerParameterIfIsNeeded(id, response)) {
+            val deleted = employeeDao.delete(id.toInt())
+            if(deleted) {
+                response.status = 200
+            }
+            else {
+                response.sendError(404)
+            }
         }
     }
 }

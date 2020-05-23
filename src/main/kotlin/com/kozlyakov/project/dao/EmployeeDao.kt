@@ -49,4 +49,13 @@ class EmployeeDao @Inject constructor(
         em.transaction.commit()
 
     }
+
+    fun delete(id: Int): Boolean {
+        val em = entityManager.get()
+        val e = this.findById(id) ?: return false
+        em.transaction.begin()
+        em.remove(e)
+        em.transaction.commit()
+        return true
+    }
 }
