@@ -43,7 +43,12 @@ class DepartmentServlet : HttpServlet() {
     @Throws(ServletException::class, IOException::class)
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
         val requestJson = request.reader.readText()
-        val department = gson.fromJson(requestJson, Department::class.java)
-        departmentDao.save(department)
+        try{
+            val department = gson.fromJson(requestJson, Department::class.java)
+            departmentDao.save(department)
+        }
+        catch (e: Exception) {
+            response.sendError(400, e.message)
+        }
     }
 }
