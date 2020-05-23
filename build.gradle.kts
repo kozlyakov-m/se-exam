@@ -34,6 +34,19 @@ dependencies {
     implementation("org.hibernate:hibernate-core:5.4.15.Final")
 }
 
+tasks {
+    val copyToLib by registering(Copy::class) {
+        into("$buildDir/server")
+        from(staging) {
+            include("webapp-runner*")
+        }
+    }
+
+    register("stage") {
+        dependsOn(war, copyToLib)
+    }
+}
+
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
     jvmTarget = "1.8"
