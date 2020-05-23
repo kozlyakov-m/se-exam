@@ -34,7 +34,7 @@ class Departments extends React.Component {
         })
 
         return (
-            <div className="container">
+            <div>
                 <table className="table table-bordered table-hover">
                     <thead>
                     <tr>
