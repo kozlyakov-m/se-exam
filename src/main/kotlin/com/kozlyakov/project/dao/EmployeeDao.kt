@@ -3,9 +3,9 @@ package com.kozlyakov.project.dao
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.persist.Transactional
-import com.kozlyakov.project.domain.Department
 import com.kozlyakov.project.domain.Employee
 import javax.persistence.EntityManager
+import javax.persistence.NoResultException
 import javax.persistence.TypedQuery
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
@@ -15,6 +15,17 @@ class EmployeeDao @Inject constructor(
 ) {
     fun findById(id: Int): Employee? {
         return entityManager.get().find(Employee::class.java, id)
+    }
+
+    fun findByTel(tel: Int): Employee? {
+        val em = entityManager.get()
+        val q: TypedQuery<Employee> = em.createQuery("SELECT a FROM Employee a JOIN a.tel p WHERE p = :number", Employee::class.java)
+        q.setParameter("number", tel)
+        return try {
+            q.singleResult
+        } catch (e: NoResultException) {
+            null
+        }
     }
 
     fun getAll(): List<Employee> {
@@ -50,6 +61,7 @@ class EmployeeDao @Inject constructor(
 
     }
 
+    @Transactional
     fun delete(id: Int): Boolean {
         val em = entityManager.get()
         val e = this.findById(id) ?: return false

@@ -1,7 +1,6 @@
 package com.kozlyakov.project
 
 
-
 import com.google.gson.Gson
 import com.google.inject.Inject
 import com.google.inject.Singleton
@@ -16,10 +15,12 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Singleton
-class EmployeeServlet: HttpServlet() {
-    @Inject lateinit var employeeDao: EmployeeDao
+class EmployeeServlet : HttpServlet() {
+    @Inject
+    lateinit var employeeDao: EmployeeDao
 
-    @Inject lateinit var gson: Gson
+    @Inject
+    lateinit var gson: Gson
 
     @Throws(ServletException::class, IOException::class)
     override fun doGet(request: HttpServletRequest, response: HttpServletResponse) {
@@ -28,10 +29,19 @@ class EmployeeServlet: HttpServlet() {
             query.isNullOrEmpty() -> response.writer.write(gson.toJson(employeeDao.getAll()))
             query.contains("department_id") -> handleGetRequestWithDepartmentIdParameter(request, response)
             query.contains("id") -> handleGetRequestWithIdParameter(request, response)
+            query.contains("tel") -> handleGetRequestWithTelParameter(request, response)
             else -> response.sendError(404)
         }
 
     }
+
+    private fun handleGetRequestWithTelParameter(request: HttpServletRequest, response: HttpServletResponse) {
+        val idParameter = request.getParameter("tel")
+        if (!HandleError().sendErrorForIntegerParameterIfIsNeeded(idParameter, response)) {
+            response.writer.write(gson.toJson(employeeDao.findByTel(idParameter.toInt())))
+        }
+    }
+
     private fun handleGetRequestWithIdParameter(request: HttpServletRequest, response: HttpServletResponse) {
         val idParameter = request.getParameter("id")
         if (!HandleError().sendErrorForIntegerParameterIfIsNeeded(idParameter, response)) {
@@ -49,12 +59,11 @@ class EmployeeServlet: HttpServlet() {
     @Throws(ServletException::class, IOException::class)
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
         val requestJson = request.reader.readText()
-        try{
+        try {
             val department = gson.fromJson(requestJson, Employee::class.java)
             employeeDao.save(department)
             response.status = 201
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             response.sendError(400, e.message)
         }
     }
@@ -65,10 +74,9 @@ class EmployeeServlet: HttpServlet() {
         val id = request.reader.readLine()
         if (!HandleError().sendErrorForIntegerParameterIfIsNeeded(id, response)) {
             val deleted = employeeDao.delete(id.toInt())
-            if(deleted) {
+            if (deleted) {
                 response.status = 200
-            }
-            else {
+            } else {
                 response.sendError(404)
             }
         }
