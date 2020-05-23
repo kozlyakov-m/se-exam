@@ -5,6 +5,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <class>com.kozlyakov.project.domain.Department</class>
+        <class>com.kozlyakov.project.domain.Employee</class>
 
         <properties>
             <!-- Configuring JDBC properties -->

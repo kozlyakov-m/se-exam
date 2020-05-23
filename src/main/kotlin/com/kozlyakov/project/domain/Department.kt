@@ -10,7 +10,7 @@ data class Department @JvmOverloads constructor(
         val id: Int = 0,
 
         @Column(name = "department")
-        val login: String = "",
+        val department: String = "",
 
         @Column(name = "tel")
         val tel: Int = 0
