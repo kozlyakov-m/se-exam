@@ -61,8 +61,10 @@ class EmployeeServlet : HttpServlet() {
     @Throws(ServletException::class, IOException::class)
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
         val requestJson = request.reader.readText()
+        println("requstJson: "+requestJson)
         try {
             val department = gson.fromJson(requestJson, Employee::class.java)
+            println("deparment: "+department.toString())
             employeeDao.save(department)
             response.status = 201
         } catch (e: Exception) {

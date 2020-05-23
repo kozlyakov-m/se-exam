@@ -32,6 +32,7 @@ class Page extends React.Component {
         this.departmentsButtonClick = this.departmentsButtonClick.bind(this)
         this.employeesButtonClick = this.employeesButtonClick.bind(this)
         this.addEmployeeButtonClick = this.addEmployeeButtonClick.bind(this)
+        this.refreshTable = this.refreshTable.bind(this)
     }
 
     departmentsButtonClick(e){
@@ -44,6 +45,10 @@ class Page extends React.Component {
         this.setState({contentType: 'AddEmployee'})
     }
 
+    refreshTable(type) {
+        this.setState({contentType: type})
+    }
+
     render() {
         console.log(this.state.contentType)
         let content
@@ -51,7 +56,7 @@ class Page extends React.Component {
             content = <Employees />
         }
         else if(this.state.contentType=='AddEmployee'){
-            content = <AddEmployee />
+            content = <AddEmployee refreshTable={this.refreshTable} />
         }
         else {
             content = <Departments />

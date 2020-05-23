@@ -17,6 +17,17 @@ class Employees extends React.Component {
                 })
             })
     }
+    componentDidUpdate() {
+        const url = 'employees'
+
+        fetch(url)
+            .then(result => result.json())
+            .then(result => {
+                this.setState({
+                    data: result
+                })
+        })
+    }
 
     render() {
         const {data} = this.state
