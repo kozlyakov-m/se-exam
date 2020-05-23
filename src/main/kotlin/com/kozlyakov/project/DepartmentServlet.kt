@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.kozlyakov.project.dao.DepartmentDao
+import com.kozlyakov.project.domain.Department
 import xyz.sashenka.webapplication.isInteger
 import java.io.IOException
 import javax.servlet.ServletException
@@ -41,6 +42,11 @@ class DepartmentServlet : HttpServlet() {
 
     @Throws(ServletException::class, IOException::class)
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
-
+//        val requestJson = request.reader.readText()
+//        val department = gson.fromJson(requestJson, Department::class.java)
+//        //
+//        //response.writer.write(gson.toJson(department))
+//        println("doPost")
+//        departmentDao.save(department)
     }
 }

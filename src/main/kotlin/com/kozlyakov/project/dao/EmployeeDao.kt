@@ -21,4 +21,14 @@ class EmployeeDao @Inject constructor(
         val allQuery: TypedQuery<Employee> = entityManager.get().createQuery(all)
         return allQuery.resultList
     }
+
+    fun findByDepartmentId(id: Int): List<Employee> {
+
+        val query = entityManager.get().createQuery(
+                "FROM Employee WHERE department_id = $id",
+                Employee::class.java
+        )
+
+        return query.resultList
+    }
 }

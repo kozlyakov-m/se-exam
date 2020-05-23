@@ -21,4 +21,10 @@ class DepartmentDao @Inject constructor(
         val allQuery: TypedQuery<Department> = entityManager.get().createQuery(all)
         return allQuery.resultList
     }
+
+//    fun save(department: Department) {
+//        println("save")
+//        println(department.toString())
+//        entityManager.get().persist(department)
+//    }
 }
