@@ -6,6 +6,6 @@ import com.google.inject.servlet.GuiceServletContextListener
 
 class GuiceServletConfig : GuiceServletContextListener() {
     override fun getInjector(): Injector {
-        return Guice.createInjector(GuiceServletModule())
+        return Guice.createInjector(GuiceServletModule(), DatabaseModule())
     }
 }
