@@ -1,35 +1,45 @@
 <html>
 <head>
-
+    <title>Телефонный справочник</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://unpkg.com/react@^16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16.13.0/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
 </head>
 <body>
-    <a href="/departments">Departments</a>
-    <br>
-    <a href="/departments?id=1">Department 1</a>
-    <br>
-    <a href="/departments?id=2">Department 2</a>
-    <br>
-
-    <a href="/employees">Employees</a>
-    <br>
-    <a href="/employees?id=1">Employee 1</a>
-    <br>
-    <a href="/employees?id=2">Employee 2</a>
-    <br>
-    <a href="/employees?department_id=1">Department 1 employees</a>
-    <br>
-    <a href="/employees?department_id=2">Department 2 employees</a>
-    <br>
-    <a href="/employees?tel=8902737">Employee with tel 8902737</a>
-    <br>
-    <a href="/employees?tel=1892637">Employee with tel 1892637</a>
-    <br>
-    <a href="/employees?tel=45637">Employee with tel 45637</a>
-
-<!--    <form action="/departments" method="post" enctype="application/json">-->
-<!--        <input type="text" name="department">-->
-<!--        <input type="text" name="tel">-->
-<!--        <button type="submit">Submit</button>-->
-<!--    </form>-->
+    <nav class="navbar navbar-dark bg-primary mb-3">
+        <span class="navbar-brand">Телефонный справочник</span>
+    </nav>
+    <div class="container">
+        <details>
+            <summary>Ссылки для быстрого тестирования get-запросов</summary>
+            <a href="/departments">Departments</a>
+            <br>
+            <a href="/departments?id=1">Department 1</a>
+            <br>
+            <a href="/departments?id=2">Department 2</a>
+            <br>
+            <a href="/employees">Employees</a>
+            <br>
+            <a href="/employees?id=1">Employee 1</a>
+            <br>
+            <a href="/employees?id=2">Employee 2</a>
+            <br>
+            <a href="/employees?department_id=1">Department 1 employees</a>
+            <br>
+            <a href="/employees?department_id=2">Department 2 employees</a>
+            <br>
+            <a href="/employees?tel=8902737">Employee with tel 8902737</a>
+            <br>
+            <a href="/employees?tel=1892637">Employee with tel 1892637</a>
+            <br>
+            <a href="/employees?tel=45637">Employee with tel 45637</a>
+        </details>
+        <div id="root"></div>
+    </div>
+    <script type="text/babel" src="react/departments.js"></script>
+    <script type="text/babel" src="react/page.js"></script>
 </body>
 </html>
