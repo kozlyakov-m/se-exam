@@ -27,19 +27,21 @@ class Page extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            contentType: 'DepartmentsTable'
+            contentType: 'DepartmentsTable',
+            departmentId: null
         }
         this.departmentsButtonClick = this.departmentsButtonClick.bind(this)
         this.employeesButtonClick = this.employeesButtonClick.bind(this)
         this.addEmployeeButtonClick = this.addEmployeeButtonClick.bind(this)
         this.refreshTable = this.refreshTable.bind(this)
+        this.departmentRowClick = this.departmentRowClick.bind(this)
     }
 
     departmentsButtonClick(e){
         this.setState({contentType: 'DepartmentsTable'})
     }
     employeesButtonClick(e){
-        this.setState({contentType: 'EmployeesTable'})
+        this.setState({contentType: 'EmployeesTable', departmentId: null})
     }
     addEmployeeButtonClick(e){
         this.setState({contentType: 'AddEmployee'})
@@ -49,17 +51,21 @@ class Page extends React.Component {
         this.setState({contentType: type})
     }
 
+    departmentRowClick(id) {
+        this.setState({contentType: 'EmployeesTable', departmentId: id})
+    }
+
     render() {
         console.log(this.state.contentType)
         let content
         if(this.state.contentType=='EmployeesTable') {
-            content = <Employees />
+            content = <Employees departmentId={this.state.departmentId}/>
         }
         else if(this.state.contentType=='AddEmployee'){
             content = <AddEmployee refreshTable={this.refreshTable} />
         }
         else {
-            content = <Departments />
+            content = <Departments handleRowClick={this.departmentRowClick}/>
         }
         return (
             <div className="containter">

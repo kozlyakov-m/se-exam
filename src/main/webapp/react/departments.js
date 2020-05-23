@@ -24,7 +24,7 @@ class Departments extends React.Component {
         const result = data.map(d => {
             return (
                 <tbody>
-                <tr role="button" key={d.id}>
+                <tr role="button" key={d.id} onClick={()=>{this.props.handleRowClick(d.id)}}>
                     <td>{d.id}</td>
                     <td>{d.department}</td>
                     <td>{d.tel}</td>

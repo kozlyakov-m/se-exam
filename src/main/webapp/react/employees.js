@@ -8,7 +8,10 @@ class Employees extends React.Component {
     }
 
     componentDidMount() {
-        const url = 'employees'
+        let url = 'employees'
+        if( this.props.departmentId !== null) {
+           url = 'employees?department_id='+this.props.departmentId
+        }
 
         fetch(url)
             .then(result => result.json())
@@ -19,7 +22,10 @@ class Employees extends React.Component {
             })
     }
     componentDidUpdate() {
-        const url = 'employees'
+        let url = 'employees'
+        if( this.props.departmentId !== null) {
+           url = 'employees?department_id='+this.props.departmentId
+        }
 
         fetch(url)
             .then(result => result.json())
