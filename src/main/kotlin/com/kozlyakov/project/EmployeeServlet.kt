@@ -24,8 +24,8 @@ class EmployeeServlet: HttpServlet() {
         val query = request.queryString
         when {
             query.isNullOrEmpty() -> response.writer.write(gson.toJson(employeeDao.getAll()))
-            query.contains("id") -> handleGetRequestWithIdParameter(request, response)
             query.contains("department_id") -> handleGetRequestWithDepartmentIdParameter(request, response)
+            query.contains("id") -> handleGetRequestWithIdParameter(request, response)
             else -> response.sendError(404)
         }
 
