@@ -35,11 +35,18 @@ class Page extends React.Component {
 
     render() {
         console.log(this.state.contentType)
+        let table
+        if(this.state.contentType=='EmployeesTable') {
+            table = <Employees />
+        }
+        else {
+            table = <Departments />
+        }
         return (
             <div className="containter">
                 <DepartmentsButton onClick={this.departmentsButtonClick} />
                 <EmployeesButton onClick={this.employeesButtonClick} />
-                <Departments />
+                {table}
             </div>
         )
     }
