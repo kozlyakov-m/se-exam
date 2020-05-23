@@ -15,6 +15,14 @@ function EmployeesButton(props) {
     )
 }
 
+function AddEmployeeButton(props) {
+    return (
+        <button onClick={props.onClick} className="btn btn-outline-primary mb-3 mr-2">
+           Добавить сотрудника
+        </button>
+    )
+}
+
 class Page extends React.Component {
     constructor(props){
         super(props)
@@ -23,7 +31,7 @@ class Page extends React.Component {
         }
         this.departmentsButtonClick = this.departmentsButtonClick.bind(this)
         this.employeesButtonClick = this.employeesButtonClick.bind(this)
-
+        this.addEmployeeButtonClick = this.addEmployeeButtonClick.bind(this)
     }
 
     departmentsButtonClick(e){
@@ -32,21 +40,28 @@ class Page extends React.Component {
     employeesButtonClick(e){
         this.setState({contentType: 'EmployeesTable'})
     }
+    addEmployeeButtonClick(e){
+        this.setState({contentType: 'AddEmployee'})
+    }
 
     render() {
         console.log(this.state.contentType)
-        let table
+        let content
         if(this.state.contentType=='EmployeesTable') {
-            table = <Employees />
+            content = <Employees />
+        }
+        else if(this.state.contentType=='AddEmployee'){
+            content = <AddEmployee />
         }
         else {
-            table = <Departments />
+            content = <Departments />
         }
         return (
             <div className="containter">
                 <DepartmentsButton onClick={this.departmentsButtonClick} />
                 <EmployeesButton onClick={this.employeesButtonClick} />
-                {table}
+                <AddEmployeeButton onClick={this.addEmployeeButtonClick} />
+                {content}
             </div>
         )
     }
