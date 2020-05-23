@@ -28,8 +28,14 @@ class AddEmployee extends React.Component{
             },
             body: json
         })
-            //.then(result => result.json())
-            .then(this.props.refreshTable('EmployeesTable'))
+            .then( result => {
+                if(result.ok) {
+                    this.props.refreshTable('EmployeesTable')
+                }
+                else {
+                    alert("Ошибка")
+                }
+            })
     }
 
 
