@@ -38,14 +38,16 @@ class EmployeeServlet : HttpServlet() {
     private fun handleGetRequestWithTelParameter(request: HttpServletRequest, response: HttpServletResponse) {
         val idParameter = request.getParameter("tel")
         if (!HandleError().sendErrorForIntegerParameterIfIsNeeded(idParameter, response)) {
-            response.writer.write(gson.toJson(employeeDao.findByTel(idParameter.toInt())))
+            val e = employeeDao.findByTel(idParameter.toInt()) ?: response.sendError(404)
+            response.writer.write(gson.toJson(e))
         }
     }
 
     private fun handleGetRequestWithIdParameter(request: HttpServletRequest, response: HttpServletResponse) {
         val idParameter = request.getParameter("id")
         if (!HandleError().sendErrorForIntegerParameterIfIsNeeded(idParameter, response)) {
-            response.writer.write(gson.toJson(employeeDao.findById(idParameter.toInt())))
+            val e = employeeDao.findById(idParameter.toInt()) ?: response.sendError(404)
+            response.writer.write(gson.toJson(e))
         }
     }
 
