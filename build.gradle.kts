@@ -32,6 +32,8 @@ dependencies {
     implementation("org.hibernate:hibernate-entitymanager:5.4.15.Final")
     implementation("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final")
     implementation("org.hibernate:hibernate-core:5.4.15.Final")
+
+    implementation("com.google.code.gson:gson:2.8.6")
 }
 
 tasks {
