@@ -42,11 +42,8 @@ class DepartmentServlet : HttpServlet() {
 
     @Throws(ServletException::class, IOException::class)
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
-//        val requestJson = request.reader.readText()
-//        val department = gson.fromJson(requestJson, Department::class.java)
-//        //
-//        //response.writer.write(gson.toJson(department))
-//        println("doPost")
-//        departmentDao.save(department)
+        val requestJson = request.reader.readText()
+        val department = gson.fromJson(requestJson, Department::class.java)
+        departmentDao.save(department)
     }
 }

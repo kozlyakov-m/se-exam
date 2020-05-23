@@ -7,11 +7,11 @@ import javax.persistence.*
 @Table(name = "departments")
 data class Department @JvmOverloads constructor(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id")
-        val id: Int = 0,
+        var id: Int = 0,
 
         @Column(name = "department")
-        val department: String = "",
+        var department: String = "",
 
         @Column(name = "tel")
-        val tel: Int = 0
+        var tel: Int = 0
 )

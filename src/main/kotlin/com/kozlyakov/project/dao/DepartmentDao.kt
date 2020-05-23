@@ -2,6 +2,7 @@ package com.kozlyakov.project.dao
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import com.google.inject.persist.Transactional
 import com.kozlyakov.project.domain.Department
 import javax.persistence.EntityManager
 import javax.persistence.TypedQuery
@@ -22,9 +23,17 @@ class DepartmentDao @Inject constructor(
         return allQuery.resultList
     }
 
-//    fun save(department: Department) {
-//        println("save")
-//        println(department.toString())
-//        entityManager.get().persist(department)
-//    }
+    @Transactional
+    fun save(gsonDepartment: Department) {
+        val em = entityManager.get()
+        em.transaction.begin()
+
+        val department = Department()
+        department.department = gsonDepartment.department
+        department.tel = gsonDepartment.tel
+
+        em.persist(department)
+        em.transaction.commit()
+
+    }
 }
