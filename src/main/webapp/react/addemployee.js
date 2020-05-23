@@ -1,5 +1,7 @@
 class AddEmployee extends React.Component{
 
+
+
         render() {
 
             return (
@@ -10,6 +12,7 @@ class AddEmployee extends React.Component{
                             <input type="text"
                                    name="login"
                                    className="form-control"
+                                   required
                             />
                         </div>
                         <div className="form-group">
@@ -17,6 +20,7 @@ class AddEmployee extends React.Component{
                             <input type="text"
                                    name="password"
                                    className="form-control"
+                                   required
                             />
                         </div>
                         <div className="form-group">
@@ -24,6 +28,7 @@ class AddEmployee extends React.Component{
                             <input type="text"
                                    name="resource"
                                    className="form-control"
+                                   required
                             />
                         </div>
                     </form>
