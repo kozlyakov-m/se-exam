@@ -7,6 +7,8 @@ import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.kozlyakov.project.dao.DepartmentDao
 import com.kozlyakov.project.dao.EmployeeDao
+import com.kozlyakov.project.domain.Department
+import com.kozlyakov.project.domain.Employee
 import java.io.IOException
 import javax.servlet.ServletException
 import javax.servlet.http.HttpServlet
@@ -46,6 +48,13 @@ class EmployeeServlet: HttpServlet() {
 
     @Throws(ServletException::class, IOException::class)
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
-
+        val requestJson = request.reader.readText()
+        try{
+            val department = gson.fromJson(requestJson, Employee::class.java)
+            employeeDao.save(department)
+        }
+        catch (e: Exception) {
+            response.sendError(400, e.message)
+        }
     }
 }

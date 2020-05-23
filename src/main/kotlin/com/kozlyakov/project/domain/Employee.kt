@@ -10,13 +10,13 @@ data class Employee @JvmOverloads constructor(
         val id: Int = 0,
 
         @Column(name = "name")
-        val name: String = "",
+        var name: String = "",
 
         @Column(name = "department_id")
-        val departmentId: Int = 0,
+        var departmentId: Int = 0,
 
         @ElementCollection
         @CollectionTable(name = "tel", joinColumns = [JoinColumn(name = "employee_id")])
         @Column(name = "number")
-        val tel: List<Int> = listOf()
+        var tel: List<Int> = listOf()
 )

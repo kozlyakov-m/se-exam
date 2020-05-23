@@ -2,6 +2,8 @@ package com.kozlyakov.project.dao
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import com.google.inject.persist.Transactional
+import com.kozlyakov.project.domain.Department
 import com.kozlyakov.project.domain.Employee
 import javax.persistence.EntityManager
 import javax.persistence.TypedQuery
@@ -11,9 +13,10 @@ import javax.persistence.criteria.Root
 class EmployeeDao @Inject constructor(
         var entityManager: Provider<EntityManager>
 ) {
-    fun findById(id: Int): Employee?{
+    fun findById(id: Int): Employee? {
         return entityManager.get().find(Employee::class.java, id)
     }
+
     fun getAll(): List<Employee> {
         val criteriaQuery = entityManager.get().criteriaBuilder.createQuery(Employee::class.java)
         val rootEntry: Root<Employee> = criteriaQuery.from(Employee::class.java)
@@ -30,5 +33,20 @@ class EmployeeDao @Inject constructor(
         )
 
         return query.resultList
+    }
+
+    @Transactional
+    fun save(gsonEmployee: Employee) {
+        val em = entityManager.get()
+        em.transaction.begin()
+
+        val e = Employee()
+        e.name = gsonEmployee.name
+        e.departmentId = gsonEmployee.departmentId
+        e.tel = gsonEmployee.tel
+
+        em.persist(e)
+        em.transaction.commit()
+
     }
 }
