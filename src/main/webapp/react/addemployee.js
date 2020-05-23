@@ -48,6 +48,7 @@ class AddEmployee extends React.Component{
                         <input type="text"
                                name="name"
                                className="form-control"
+                               placeholder="User"
                                required
                         />
                     </div>
@@ -56,16 +57,20 @@ class AddEmployee extends React.Component{
                         <input type="text"
                                name="departmentId"
                                className="form-control"
+                               placeholder="1"
                                required
                         />
+                        <small class="form-text text-muted">см. спискок отделов</small>
                     </div>
                     <div className="form-group">
                         <label>Телефон:</label>
                         <input type="text"
                                name="tel"
                                className="form-control"
+                               placeholder="1234567890"
                                required
                         />
+                        <small class="form-text text-muted">любое число</small>
                     </div>
                     <div className="form-group">
                          <button className="btn btn-secondary" onClick={this.formSubmitHandler}>
