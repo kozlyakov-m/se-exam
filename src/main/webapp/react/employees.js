@@ -4,6 +4,7 @@ class Employees extends React.Component {
         this.state = {
             data: []
         };
+        this.deleteEmployee = this.deleteEmployee.bind(this)
     }
 
     componentDidMount() {
@@ -29,6 +30,16 @@ class Employees extends React.Component {
         })
     }
 
+    deleteEmployee(id) {
+        fetch("/employees", {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: id
+        })
+    }
+
     render() {
         const {data} = this.state
 
@@ -38,11 +49,12 @@ class Employees extends React.Component {
             )
             return (
                 <tbody>
-                <tr role="button" key={d.id}>
+                <tr key={d.id}>
                     <td>{d.id}</td>
                     <td>{d.name}</td>
+                    <td>{numbers}</td>
                     <td>
-                    {numbers}
+                    <button className="btn btn-outline-danger" onClick={() => this.deleteEmployee(d.id)}>Удалить</button>
                     </td>
 
                 </tr>
@@ -58,6 +70,7 @@ class Employees extends React.Component {
                         <th scope="col">id</th>
                         <th scope="col">name</th>
                         <th scope="col">tel</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     {result}
