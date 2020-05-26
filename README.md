@@ -1,4 +1,5 @@
-Телефонный справочник
+Телефонный справочник 
+[![Build Status](https://travis-ci.org/kozlyakov-m/se-exam.svg?branch=master)](https://travis-ci.org/kozlyakov-m/se-exam)  
 [se-exam.herokuapp.com](https://se-exam.herokuapp.com/)
 
 1. задание выполняем индивидуально, в приватном репозитории. Для проверки пригласите theaspect@gmail.com
