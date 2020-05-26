@@ -1,0 +1,17 @@
+language: java
+install: true
+os: linux
+dist: trusty
+jdk: oraclejdk8
+env:
+  - DBURL=jdbc:h2:./AAA DBLOGIN=sa DBPASS=
+script:
+  - ./gradlew build
+deploy:
+  provider: heroku
+  api_key:
+    secure: SwUuTJwa9IANvmKnv1LjlDDFPOtnX1kTjEfKJKSLT8nTcB8wAxEaICiediynA2VwkLx6Y+glHcegQ9axEy04/X4PKtCiN+go93gbsv2/DlkSVnqLS9aNHKpAfg8JZvbg3Bn7BjEQNZ6gwLd9vL/c21WC1nij27IoKKTiQ85JUDljYKgLHbtc0Gl4bKGRQtSHK4g4YxxxDjMmoHWmTj5YypGVIy8ZKOhNj6S7N3uNOEWssKHJRG3oWRUEntiYvuWMuJkwnnMdpr1uO3Ke/w/rrWQN/eQ8RC40fgUaLmryKA61qCmk2aQRTVt34C53vVGjgm1pzej6l79fHnAJFIPpN+vQ2wiHzod6fF0lQZYhUHU0J0NBr39xPrQYM++gIkeGNaEuN7gU2MWND4/o2FieakHOFoOkUlqpEITKVgG2LiuGUGRIpitGuOcmH7wQqPQRb4TFBz0ChRqGw4BywRreDA+2xyuYMsTg4zRdnJ2oqr6BuzjnBnCHiqg5oGZ4S9V+wcHad4YgbZqwQIAcFt8Ovo1pQMsRtOtMGUGICtycjcc1bJQxsxHSrxEVEFv2zvOBjmmo4LSqKvaFigs07aG+ltM3srjbTJz4QQ9XEJ+F8RdSAkaKwRwGxoJIk0+UjxiSk2qrn38y4OxK6zKr+ZdVe0j/tc6qW1J9Bj7msxr2hNg=
+  app: se-exam
+  on:
+    repo: kozlyakov-m/se-exam
+    all_branches: true
